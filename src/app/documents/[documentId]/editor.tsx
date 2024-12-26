@@ -1,47 +1,49 @@
-"use client";
+'use client';
 
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 
-import TaskItem from "@tiptap/extension-task-item";
-import TaskList from "@tiptap/extension-task-list";
+import TaskItem from '@tiptap/extension-task-item';
+import TaskList from '@tiptap/extension-task-list';
 
-import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
 
-import Image from "@tiptap/extension-image";
-import ImageResize from "tiptap-extension-resize-image";
+import Image from '@tiptap/extension-image';
+import ImageResize from 'tiptap-extension-resize-image';
 
-import Underline from "@tiptap/extension-underline";
-import FontFamily from "@tiptap/extension-font-family";
-import TextStyle from "@tiptap/extension-text-style";
+import Underline from '@tiptap/extension-underline';
+import FontFamily from '@tiptap/extension-font-family';
+import TextStyle from '@tiptap/extension-text-style';
 
-import { Color } from "@tiptap/extension-color";
-import Highlight from "@tiptap/extension-highlight";
+import { Color } from '@tiptap/extension-color';
+import Highlight from '@tiptap/extension-highlight';
 
-import TextAlign from "@tiptap/extension-text-align";
+import TextAlign from '@tiptap/extension-text-align';
 
-import Link from "@tiptap/extension-link";
+import Link from '@tiptap/extension-link';
 
-import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
-import { useStorage } from "@liveblocks/react";
+import { useLiveblocksExtension } from '@liveblocks/react-tiptap';
+import { useStorage } from '@liveblocks/react';
 
-import { useEditorStore } from "@/store/use-editor-store";
-import { FontSizeExtensions } from "@/extensions/font-size";
-import { LineHeightExtension } from "@/extensions/line-height";
-import { Ruler } from "./ruler";
-import { Threads } from "./threads";
-import { LEFT_MARGIN_DEFAULT, RIGHT_MARGIN_DEFAULT } from "@/constants/margins";
+import { useEditorStore } from '@/store/use-editor-store';
+import { FontSizeExtensions } from '@/extensions/font-size';
+import { LineHeightExtension } from '@/extensions/line-height';
+import { Ruler } from './ruler';
+import { Threads } from './threads';
+import { LEFT_MARGIN_DEFAULT, RIGHT_MARGIN_DEFAULT } from '@/constants/margins';
 
 interface EditorProps {
   initialContent?: string | undefined;
 }
 
 export const Editor = ({ initialContent }: EditorProps) => {
-  const leftMargin = useStorage((root) => root.leftMargin) ?? LEFT_MARGIN_DEFAULT;
-  const rightMargin = useStorage((root) => root.rightMargin) ?? RIGHT_MARGIN_DEFAULT;
+  const leftMargin =
+    useStorage((root) => root.leftMargin) ?? LEFT_MARGIN_DEFAULT;
+  const rightMargin =
+    useStorage((root) => root.rightMargin) ?? RIGHT_MARGIN_DEFAULT;
 
   const liveblocks = useLiveblocksExtension({
     initialContent,
@@ -50,6 +52,7 @@ export const Editor = ({ initialContent }: EditorProps) => {
   const { setEditor } = useEditorStore();
 
   const editor = useEditor({
+    autofocus: true,
     immediatelyRender: false,
     onCreate({ editor }) {
       setEditor(editor);
@@ -79,7 +82,7 @@ export const Editor = ({ initialContent }: EditorProps) => {
       attributes: {
         style: `padding-left: ${leftMargin}px; padding-right: ${rightMargin}px;`,
         class:
-          "focus:outline-none print:boder-0 border bg-white border-editor-border flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text",
+          'focus:outline-none print:boder-0 border bg-white border-editor-border flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text',
       },
     },
     extensions: [
@@ -99,17 +102,17 @@ export const Editor = ({ initialContent }: EditorProps) => {
       TextStyle,
       Color,
       LineHeightExtension.configure({
-        types: ["heading", "paragraph"],
-        defaultLineHeight: "1.5",
+        types: ['heading', 'paragraph'],
+        defaultLineHeight: '1.5',
       }),
       FontSizeExtensions,
       TextAlign.configure({
-        types: ["heading", "paragraph"],
+        types: ['heading', 'paragraph'],
       }),
       Link.configure({
         openOnClick: false,
         autolink: true,
-        defaultProtocol: "https",
+        defaultProtocol: 'https',
       }),
       Highlight.configure({
         multicolor: true,
